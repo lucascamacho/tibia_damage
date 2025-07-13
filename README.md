@@ -34,6 +34,8 @@ you hit when you trow a rune, send an diamond arrow, cast *exori gran*, etc, etc
 The quantity of how much monsters the characters hit in an single Area attack is sampled from a truncated normal distribution 
 where the minimum value that hit is 1 and the maximum is the size, in sqm’s, that the Area attack hit.
 
+![alt text](https://github.com/lucascamacho/tibia_damage/blob/main/area_attack.png)
+
 Let’s get a practical example. We have our knight named Knight, very creative. Knight can attack one base attack and one *exori gran* 
 in a single turn. So in the level 1 turn, Knight could hit one Basic attack which the damage depends on the Knight’s level plus the Area attack 
 which is an *exori gran* which has 9 sqm’s. The quantity of monsters that Knight will hit in the *exori gran* is a sampled number from 1 to 9 
@@ -42,8 +44,6 @@ So the final damage of our Knight in the level 1 will be Base attack + Area atta
 That’s the basic intuition of our model. 
 
 I let the model run for 6000 timesteps which represents the damage of our characters in the level 1 to level 6000.
-
-![alt text](https://github.com/lucascamacho/tibia_damage/blob/main/area_attack.png)
 
 ### Assumptions
 

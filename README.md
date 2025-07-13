@@ -83,5 +83,6 @@ More comparable, right? Now, Druids and Sorcerers have the highest damage but no
 The model is very simplistic and there is a lot of other factors affecting the damage that a player can do with a certain vocation
 like ability of the player in never loose a attack turn or never miss an arrow turn, healing moments, KS, random factors in a hunt, etc, etc. 
 Nevertheless, it is a starting point to understand and answer the question about the vocations balance which is fundamental to understand because
-influences XP/hr, money, TC's and the social relations within Tibia. Finally, this does not completely answer our question but maybe we can start 
-to talk about it in a more objective way.
+influences XP/hr, money, TC's and the social relations within Tibia related to which vocation you choose to your guild or in a guild war context.
+
+Finally, this does not completely answer our question but maybe we can start to talk about it in a more objective way.

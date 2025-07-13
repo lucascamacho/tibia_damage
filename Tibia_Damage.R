@@ -1,17 +1,18 @@
-# comparar o scalling de dano para cada vocação no tibia.
-# o scalling é o mesmo em todas as vocações, o que muda é a quantidade de alvos por turno
-# knight: 1 ataque comum + ataque de área (exori gran: 9 sqm) 
-# sorcerer : 1 ataque comum + runa de área (GFB: 37 sqm)
-# druid: 1 ataque comum + runa de área (AVA: 37 sqm)
-# paladin: 1 ataque comum + runa de area (Diamond arrow: 21; AVA: 37 sqm)
-# monk: 1 ataque comum + runa de area (AVA: 37 sqm)
+# compare the scaling of damage for each vocation in tibia.
+# the scaling is pretty similar for each vocation, what changes is mostly the area attack for each vocation
 #
-# a cada turno, a quantidade de alvos deve variar dado uma certa probabilidade normal
+# knight: 1 basic attack + area attack (exori gran: 9 sqm) 
+# sorcerer : 1 basic attack + rune (GFB: 37 sqm)
+# druid: 1 basic attack + rune (AVA: 37 sqm)
+# paladin: 1 basic attack + rune (Diamond arrow: 21; AVA: 37 sqm)
+# monk: 1 basic attack + rune (AVA: 37 sqm)
 #
-library(truncnorm)
-library(ggplot2)
-library(tidyr)
-library(dplyr)
+# in each turn, the quantity of targets should vary given a certain truncated normal probability distribution
+#
+if(!require(truncnorm)){install.packages("truncnorm"); library(truncnorm)}
+if(!require(ggplot2)){install.packages("ggplot2"); library(ggplot2)}
+if(!require(tidyr)){install.packages("tidyr"); library(tidyr)}
+if(!require(dplyr)){install.packages("dplyr"); library(dplyr)}
 
 # define how much SQM a vocation hits in a turn.
 Hit_Number = function(sqm, hit_number){

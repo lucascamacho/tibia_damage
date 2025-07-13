@@ -43,7 +43,7 @@ for(i in 1:length(level)){
     base_k = ceiling(i / 5)
     base_s = ceiling(i / 5)
     base_d = ceiling(i / 5)
-    base_p = ceiling(i / 5) * Hit_Number(21, 1)
+    base_p = ceiling(i / 5)# * Hit_Number(21, 1)
     base_m = ceiling(i / 5)
   }
   
@@ -51,7 +51,7 @@ for(i in 1:length(level)){
     base_k = ceiling(i / 6)
     base_s = ceiling(i / 6)
     base_d = ceiling(i / 6)
-    base_p = ceiling(i / 6) * Hit_Number(21, 1)
+    base_p = ceiling(i / 6)# * Hit_Number(21, 1)
     base_m = ceiling(i / 6)
   }
   
@@ -59,7 +59,7 @@ for(i in 1:length(level)){
     base_k = ceiling(i / 7)
     base_s = ceiling(i / 7)
     base_d = ceiling(i / 7)
-    base_p = ceiling(i / 7) * Hit_Number(21, 1)
+    base_p = ceiling(i / 7)# * Hit_Number(21, 1)
     base_m = ceiling(i / 7)
   }
   
@@ -67,7 +67,7 @@ for(i in 1:length(level)){
     base_k = ceiling(i / 8)
     base_s = ceiling(i / 8)
     base_d = ceiling(i / 8)
-    base_p = ceiling(i / 8) * Hit_Number(21, 1)
+    base_p = ceiling(i / 8)# * Hit_Number(21, 1)
     base_m = ceiling(i / 8)
   }
   
@@ -75,7 +75,7 @@ for(i in 1:length(level)){
     base_k = ceiling(i / 9)
     base_s = ceiling(i / 9)
     base_d = ceiling(i / 9)
-    base_p = ceiling(i / 9) * Hit_Number(21, 1)
+    base_p = ceiling(i / 9)# * Hit_Number(21, 1)
     base_m = ceiling(i / 9)
   }
   
@@ -83,7 +83,7 @@ for(i in 1:length(level)){
     base_k = ceiling(i / 10)
     base_s = ceiling(i / 10)
     base_d = ceiling(i / 10)
-    base_p = ceiling(i / 10) * Hit_Number(21, 1)
+    base_p = ceiling(i / 10)# * Hit_Number(21, 1)
     base_m = ceiling(i / 10)
   }
   
@@ -91,7 +91,7 @@ for(i in 1:length(level)){
     base_k = ceiling(i / 11)
     base_s = ceiling(i / 11)
     base_d = ceiling(i / 11)
-    base_p = ceiling(i / 11) * Hit_Number(21, 1)
+    base_p = ceiling(i / 11)# * Hit_Number(21, 1)
     base_m = ceiling(i / 11)
   }
   
@@ -99,7 +99,7 @@ for(i in 1:length(level)){
     base_k = ceiling(i / 12)
     base_s = ceiling(i / 12)
     base_d = ceiling(i / 12)
-    base_p = ceiling(i / 12) * Hit_Number(21, 1)
+    base_p = ceiling(i / 12)# * Hit_Number(21, 1)
     base_m = ceiling(i / 12)
   }
   
@@ -155,5 +155,5 @@ p = ggplot(damages_long, aes(x = Level, y = Dano, color = Vocs)) +
     theme_bw()
 
 # save plot
-ggsave(p, filename = "~/Dropbox/tibia_damage/Damage_Voc.png")
+ggsave(p, filename = "~/Dropbox/tibia_damage/NoArrow_Damage_Voc.png")
 

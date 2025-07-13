@@ -127,7 +127,7 @@ colnames(damages) = c("Knight", "Sorcerer", "Druid", "Paladin", "Monk")
 summary(damages)
 
 par(mfrow = c(2,3))
-pdf("~/Dropbox/tibia_damage/Histograms_Damages.pdf")
+#pdf("~/Dropbox/tibia_damage/Histograms_Damages.png")
 hist(damages$Knight)
 hist(damages$Sorcerer)
 hist(damages$Druid)
@@ -155,5 +155,5 @@ p = ggplot(damages_long, aes(x = Level, y = Dano, color = Vocs)) +
     theme_bw()
 
 # save plot
-ggsave(p, filename = "~/Dropbox/tibia_damage/Damage_Voc.pdf")
+ggsave(p, filename = "~/Dropbox/tibia_damage/Damage_Voc.png")
 

@@ -6,7 +6,7 @@ Basically, the main argument is that Paladins can hit in a certain area 2 times 
 This ends in Paladins doing massive amount of damage compared to other vocations which can only hit in area only a single time in each turn. 
 Well, I just got curious to see how this “grows” with the characters leveling and the real impact of Diamond Arrows when leveling. 
 I construct a simple computer program which I like to share here and get some critics/recommendations about the modelling. 
-The code will be available in Github <> so you can download and play with the model as I did.
+The code will be available in Github so you can download and play with the model as I did.
 
 ### The Model
 
@@ -21,6 +21,8 @@ The Basic attack changes as the character get higher levels, as follows:
 - From level 501 to 1100 each 7 levels add 1 to the Base damage… and so on.
 
 All the characters begins the same, with 1 of Base damage attack.
+
+![alt text](~/Dropbox/tibia_damage/basic_attack.png)
 
 #### Area Attacks
 
@@ -40,6 +42,8 @@ So the final damage of our Knight in the level 1 will be Base attack + Area atta
 That’s the basic intuition of our model. 
 
 I let the model run for 6000 timesteps which represents the damage of our characters in the level 1 to level 6000.
+
+![alt text](~/Dropbox/tibia_damage/area_attack.png)
 
 ### Assumptions
 

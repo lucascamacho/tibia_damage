@@ -143,12 +143,14 @@ damages_long = damages_new %>%
                values_to = "Dano")
 
 # Plotar
-ggplot(damages_long, aes(x = Level, y = Dano, color = Vocação)) +
-  geom_line(alpha = 0.3) +
-  geom_smooth(method = "gam", se = FALSE, linewidth = 1) +
-  theme_minimal() +
-  labs(title = "Dano por Level para cada Vocação",
-       x = "Level",
-       y = "Dano") +
-  theme_bw()
-dev.off()
+p = ggplot(damages_long, aes(x = Level, y = Dano, color = Vocação)) +
+    geom_line(alpha = 0.3) +
+    geom_smooth(method = "gam", se = FALSE, linewidth = 1) +
+    theme_minimal() +
+    labs(title = "Damage by Level for each vocation",
+         x = "Level",
+         y = "Damage") +
+    theme_bw()
+
+ggsave(p, filename = "~/Dropbox/tibia_damage/Damage_Voc.pdf")
+

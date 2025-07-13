@@ -1,16 +1,27 @@
 ### Tibia Vocations Damage Modelling
 
-For a long time I see players complaining about the (un)balancing of vocations and the enormous advantage that Paladins has, manly due to the use of Diamond Arrows after level 150. Basically, the main argument is that Paladins can hit in a certain area 2 times in a same turn. This ends in Paladins doing massive amount of damage compared to other vocations which can only hit in area only a single time in each turn. Well, I just got curious to see how this “grows” with the characters levelling and the real impact of Diamond Arrows when leveling. I construct a simple computer programm which I like to share here and get some critics/recommendations about the modelling. The code will be available in Github <> so you can download and play with the model as I did.
+For a long time I see players complaining about the (un)balancing of vocations and 
+the enormous advantage that Paladins has, manly due to the use of Diamond Arrows after level 150. 
+Basically, the main argument is that Paladins can hit in a certain area 2 times in a same turn. 
+This ends in Paladins doing massive amount of damage compared to other vocations which can only hit in area only a single time in each turn. 
+Well, I just got curious to see how this “grows” with the characters leveling and the real impact of Diamond Arrows when leveling. 
+I construct a simple computer program which I like to share here and get some critics/recommendations about the modelling. 
+The code will be available in Github <> so you can download and play with the model as I did.
 
 ### The Model
 
-I am modelling how much damage does a single character of each of the five classes can do in a single turn. I am doing this as the characters levels grows. The damage modelled here is composed of 2 parts: Basic attacks and Area attacks. 
+I am modelling how much damage does a single character of each of the five classes can do in a single turn. 
+I am doing this as the characters levels grows. The damage modeled here is composed of 2 parts: Basic attacks and Area attacks. 
+
+#### Basic Attacks
+
 The Basic attack changes as the character get higher levels, as follows:
-From level 1 to level 500, each 5 levels adds 1 of the Base damage, 
-From level 150 to 500 each 6 levels add 1 of the Base damage,
-From level 501 to 1100 each 7 levels add 1 to the Base damage… 
-and so on.
-All the characters beggins the same, with 1 of Base damage attack.
+- From level 1 to level 500, each 5 levels adds 1 of the Base damage, 
+- From level 150 to 500 each 6 levels add 1 of the Base damage,
+- From level 501 to 1100 each 7 levels add 1 to the Base damage… and so on.
+All the characters begins the same, with 1 of Base damage attack.
+
+#### Area Attacks
 
 The Area attack depends on how many monsters do you get in your area attack. Sometimes when you trowh a GFB or a diamond arrow, you get 10 monsters, sometimes you get 1 monster or sometimes you are lucky and all the square meters (sqm’s) of your GFBs or arrow hit a monster. Nice. Area attacks depends on luck. For that, the Area damage is the Base Damage multiplied by the quantity of monsters that you hit when you trow a rune, send an diamond arrow, cast exori, etc, etc. The quantity of how much monsters the characters hit in an single Area attack is sampled from a truncated normal distribution where the minimum value that hit is 1 and the maximum is the size, in sqm’s, that the Area attack hit.
 

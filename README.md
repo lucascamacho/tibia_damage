@@ -55,3 +55,15 @@ in scenarios of different attacks and levels. Some simplifications are made:
 - The damage of an Area attack is just the sum of Basic attacks in several sqm’s
 - The characters do not waste any turn healing or doing other stuff, just attacking
 - There are no items or spells that increase damage, only increase the sqm’s which the Basic attack hits
+
+## Results
+
+Paladins has a lot of damage after level 150 due to the Diamond Arrow use.
+
+![alt text](https://github.com/lucascamacho/tibia_damage/blob/main/Histograms_Damage.pdf)
+
+But also Paladins has a lot of variation due to the possibility
+of both attacks hit only a single monster in a single turn.
+
+![alt text](https://github.com/lucascamacho/tibia_damage/blob/main/Damage_Voc.pdf)
+

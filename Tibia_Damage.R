@@ -13,7 +13,7 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 
-# define quantos sqm um personagem atinge em um turno dado a sorte. Cada voc tem um sqm diferente
+# define how much SQM a vocation hits in a turn.
 Hit_Number = function(sqm, hit_number){
   a = 1
   b = sqm
@@ -27,9 +27,9 @@ Hit_Number = function(sqm, hit_number){
 level = seq(1, 3000, 1)
 damages = data.frame()
 for(i in 1:length(level)){
-  # Dano: Base + Base * SQM acertados
-  # Dado um certo level, o scalling de dano muda
-  # Dano Base
+  # Damage Base + Base * SQM hit from sampling
+  # Leveling changes in time
+  # Base damage
   if(i <= 149){
     base_k = ceiling(i / 5)
     base_s = ceiling(i / 5)
@@ -98,18 +98,18 @@ for(i in 1:length(level)){
     base_k = ceiling(i / 12)
     base_s = ceiling(i / 12)
     base_d = ceiling(i / 12)
-    base_p = ceiling(i / 12) #* Hit_Number(21, 1)
+    base_p = ceiling(i / 12) * Hit_Number(21, 1)
     base_m = ceiling(i / 12)
   }
   
-  # Dano em área
-  area_k = base_k * Hit_Number(9, 1) # Exori gran 
+  # Damage in area
+  area_k = base_k * Hit_Number(9, 1) # exori gran
   area_s = (base_s * Hit_Number(37, 1)) + (base_s * Hit_Number(11, 1)) # GFB + exori vis hur
   area_d = (base_d * Hit_Number(37, 1)) + (base_d * Hit_Number(11, 1)) # AVA + exori terra hur
-  area_p = base_p * Hit_Number(37, 1) # AVA ou GFB
-  area_m = base_m * Hit_Number(37, 1) # AVA ou GFB
+  area_p = base_p * Hit_Number(37, 1) # AVA or GFB
+  area_m = base_m * Hit_Number(37, 1) # AVA or GFB
   
-  # Dano total
+  # Total damage
   total_k = base_k + area_k
   total_s = base_s + area_s
   total_d = base_d + area_d
@@ -122,10 +122,11 @@ for(i in 1:length(level)){
 }
 colnames(damages) = c("Knight", "Sorcerer", "Druid", "Paladin", "Monk")
 
-# estats básicas
+# basic stats
 summary(damages)
 
 par(mfrow = c(2,3))
+pdf("~/Dropbox/tibia_damage/Histograms_Damages.pdf")
 hist(damages$Knight)
 hist(damages$Sorcerer)
 hist(damages$Druid)
@@ -133,17 +134,17 @@ hist(damages$Paladin)
 hist(damages$Monk)
 dev.off()
 
-# Supondo que seu data frame damage tem uma coluna de índice implícita (1, 2, 3, ...)
+# 
 damages_new = damages %>% mutate(Level = row_number())
 
-# Transformar de wide para long
+# Transform wide to long
 damages_long = damages_new %>%
   pivot_longer(cols = c(Knight, Sorcerer, Druid, Paladin, Monk),
-               names_to = "Vocação",
+               names_to = "Vocs",
                values_to = "Dano")
 
-# Plotar
-p = ggplot(damages_long, aes(x = Level, y = Dano, color = Vocação)) +
+# Plot
+p = ggplot(damages_long, aes(x = Level, y = Dano, color = Vocs)) +
     geom_line(alpha = 0.3) +
     geom_smooth(method = "gam", se = FALSE, linewidth = 1) +
     theme_minimal() +
@@ -152,5 +153,6 @@ p = ggplot(damages_long, aes(x = Level, y = Dano, color = Vocação)) +
          y = "Damage") +
     theme_bw()
 
+# save plot
 ggsave(p, filename = "~/Dropbox/tibia_damage/Damage_Voc.pdf")
 

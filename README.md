@@ -22,7 +22,7 @@ The Basic attack changes as the character get higher levels, as follows:
 
 All the characters begins the same, with 1 of Base damage attack.
 
-![alt text](~/Dropbox/tibia_damage/basic_attack.png)
+![alt text](https://github.com/lucascamacho/tibia_damage/blob/main/basic_attack.png)
 
 #### Area Attacks
 
@@ -43,7 +43,7 @@ That’s the basic intuition of our model.
 
 I let the model run for 6000 timesteps which represents the damage of our characters in the level 1 to level 6000.
 
-![alt text](~/Dropbox/tibia_damage/area_attack.png)
+![alt text](https://github.com/lucascamacho/tibia_damage/blob/main/area_attack.png)
 
 ### Assumptions
 

@@ -16,13 +16,15 @@ I am doing this as the characters levels grows. The damage modeled here is compo
 #### Basic Attacks
 
 The Basic attack changes as the character get higher levels, as follows:
-- From level 1 to level 500, each 5 levels adds 1 of the Base damage, 
-- From level 150 to 500 each 6 levels add 1 of the Base damage,
-- From level 501 to 1100 each 7 levels add 1 to the Base damage… and so on.
+- From level 1 to level 500, each 5 levels adds 1 to the Base damage,
+- From level 501 to level 1100, each 6 levels adds 1 to the Base damage,
+- From level 1101 to level 1800, each 7 levels adds 1 to the Base damage… and so on (8 levels until 2600, 9 until 3500, 10 until 4300, 11 until 5200 and 12 until 6200).
 
+The gains are cumulative: a character keeps all the Base damage gained in the previous brackets, so the Base damage never decreases.
+For example, a level 500 character has 100 of Base damage, a level 1100 character has 200 and a level 3000 character has 444.
 All the characters begins the same, with 1 of Base damage attack.
 
-![alt text](https://github.com/lucascamacho/tibia_damage/blob/main/basic_attack.png)
+![alt text](basic_attack.png)
 
 #### Area Attacks
 
@@ -34,16 +36,27 @@ you hit when you trow a rune, send an diamond arrow, cast *exori gran*, etc, etc
 The quantity of how much monsters the characters hit in an single Area attack is sampled from a truncated normal distribution 
 where the minimum value that hit is 1 and the maximum is the size, in sqm’s, that the Area attack hit.
 
-![alt text](https://github.com/lucascamacho/tibia_damage/blob/main/area_attack.png)
+![alt text](area_attack.png)
+
+In each turn, each vocation does:
+- Knight: 1 Basic attack + *exori gran* (9 sqm)
+- Sorcerer: 1 Basic attack + GFB (37 sqm) + *exori vis hur* (11 sqm)
+- Druid: 1 Basic attack + Avalanche (37 sqm) + *exori terra hur* (11 sqm)
+- Paladin: 1 Basic attack + Avalanche (37 sqm). From level 150, the Basic attack can be a Diamond Arrow (21 sqm)
+- Monk: 1 Basic attack + Avalanche (37 sqm)
+
+The damage of all the attacks in a turn is added. The Diamond Arrow is not an extra attack: it replaces the Paladin Basic attack, 
+which then hits all the monsters in its area instead of a single one.
 
 Let’s get a practical example. We have our knight named Knight, very creative. Knight can attack one base attack and one *exori gran* 
 in a single turn. So in the level 1 turn, Knight could hit one Basic attack which the damage depends on the Knight’s level plus the Area attack 
 which is an *exori gran* which has 9 sqm’s. The quantity of monsters that Knight will hit in the *exori gran* is a sampled number from 1 to 9 
 sqm’s from a truncated normal distribution. Suppose that Knight is a lucky guy and in this level 1 turn, he hits 7 monsters with his *exori gran*. 
-So the final damage of our Knight in the level 1 will be Base attack + Area attack => 1 + (1 * 7) =  9. 
+So the final damage of our Knight in the level 1 will be Base attack + Area attack => 1 + (1 * 7) = 8. 
 That’s the basic intuition of our model. 
 
-I let the model run for 6000 timesteps which represents the damage of our characters in the level 1 to level 6000.
+I let the model run for 3000 timesteps which represents the damage of our characters in the level 1 to level 3000.
+In the script, `use_diamond_arrow` switches the Diamond Arrows on and off, and `save_figures` saves the figures below.
 
 ### Assumptions
 
@@ -58,30 +71,46 @@ in scenarios of different attacks and levels. Some simplifications are made:
 
 ### Results with Diamond Arrows
 
-Paladins has a lot of damage after level 150 due to the Diamond Arrow use. Look at the x axis range in the Paladin histogram.
+On average, the damage in a turn (in multiples of the Base damage) is:
 
-![alt text](https://github.com/lucascamacho/tibia_damage/blob/main/Histograms_Damage.png)
+| Knight | Sorcerer | Druid | Paladin | Monk |
+|---|---|---|---|---|
+| 5.8 | 24.9 | 25.0 | 27.9 | 19.1 |
 
-But also Paladins has a lot of variation due to the possibility of both attacks hit only a single monster in a single turn.
+With Diamond Arrows, Paladins have the highest damage, but only about 12% above Sorcerers and Druids.
+Nothing astronomic.
 
-![alt text](https://github.com/lucascamacho/tibia_damage/blob/main/Damage_Voc.png)
+![alt text](Histograms_Damage.png)
+
+Paladins are on top along all the levels, close to Sorcerers and Druids. Knights are far behind.
+
+![alt text](Damage_Voc.png)
 
 Let's remove the Diamond Arrows from Paladins and see how the damage stays
 
 ### Results without Diamond Arrows
 
-Well, Paladins have now more "normal" damage compared to other vocations. 
+| Knight | Sorcerer | Druid | Paladin | Monk |
+|---|---|---|---|---|
+| 5.8 | 24.9 | 25.0 | 19.0 | 19.1 |
 
-![alt text](https://github.com/lucascamacho/tibia_damage/blob/main/NoArrow_Histograms_Damage.png)
+Without Diamond Arrows, Paladins have the same damage as Monks (both use a single Basic attack + Avalanche), 
+and Druids and Sorcerers have the highest damage.
 
-More comparable, right? Now, Druids and Sorcerers have the highest damage but nothing astronomic.
+![alt text](NoArrow_Histograms_Damage.png)
 
-![alt text](https://github.com/lucascamacho/tibia_damage/blob/main/NoArrow_Damage_Voc.png)
+![alt text](NoArrow_Damage_Voc.png)
 
 ### (Basic) Conclusions
 
+In this model, Diamond Arrows put Paladins on top, but by a small margin: they add about 9 times the Base damage per turn, 
+which moves Paladins from the Monk level to slightly above Sorcerers and Druids. The "massive" damage advantage does not appear.
+Also, since all the vocations share the same Base damage, the difference between vocations is the same at any level: 
+leveling increases the damage of everyone, but does not change who is ahead.
+
 The model is very simplistic and there is a lot of other factors affecting the damage that a player can do with a certain vocation
-like ability of the player in never loose a attack turn or never miss an arrow turn, healing moments, KS, random factors in a hunt, etc, etc. 
+like ability of the player in never loose a attack turn or never miss an arrow turn, healing moments, KS, random factors in a hunt, 
+spell cooldowns, magic level and skills, etc, etc. 
 Nevertheless, it is a starting point to understand and answer the question about the vocations balance which is fundamental to understand because
 influences XP/hr, money, TC's and the social relations within Tibia related to which vocation you choose to your guild or in a guild war context.
 
